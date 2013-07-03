@@ -1,7 +1,7 @@
-var equals = false;
+var equalsPressed = false;
 var onStatus = true;
 var displayLength = 0;
-var root = false;
+var binaryPressed = false;
 
 $(document).ready(function() {
     $('.button').mouseenter(function() {
@@ -14,7 +14,7 @@ $(document).ready(function() {
 		if (!onStatus || displayLength > 10) {
 			return;
 		}
-		if ($('#display').text() === '0') {
+		if ($('#display').text() === '0' || binaryPressed) {
 			var display = '';
 		}
 		else {
@@ -52,13 +52,13 @@ $(document).ready(function() {
 		var display = $('#display').text();
 		var op = $(this).text();
 		display = display.trim() + op.trim();
-		if (equals) {
+		if (equalsPressed) {
 			$('#topLine').text(display);
 		}
 		else {
 			$('#topLine').append(display);
 		}
-		$('#display').text('0');
+		binaryPressed = true;
 	});
 	$('#equals').click(function() {
 		if (!onStatus) {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 		$('#topLine').append(display);
 		var result = parseCalc();
 		$('#display').text(result);
-		equals = true;
+		equalsPressed = true;
 	});
 	$('#sqrt').click(function() {
 		if (!onStatus) {
