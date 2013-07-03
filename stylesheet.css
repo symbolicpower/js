@@ -1,0 +1,121 @@
+#textBox {
+	height: 80px;
+	background-color: #3eb677;
+	border-radius: 5px;
+	border: ridge;
+	margin-bottom: 10px;
+	display: block;
+}
+
+#display {
+	font-weight: bold;
+	font-family: "digital", Verdana;
+	font-size: 35pt;
+	text-align: right;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+	margin-top: 5px;
+	padding: 2px;
+}
+
+#topLine {
+	font-family: "digital", Verdana;
+	font-size: 10pt;
+	text-align: right;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+	margin-top: 5px;
+}
+
+div div div p {
+	font-family: Helvetica;
+}
+
+#solar {
+	background-color: #663333;
+	width: 100px;
+	height: 30px;
+	border: 2px solid black;
+	border-radius: 5px;
+	display: inline-block;
+}
+
+#name {
+	display: inline-block;
+	text-align: right;
+	color: white;
+	font-weight: bold;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+	vertical-align: top;
+}
+
+.number {
+	background-color: #7d6d5a;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	color: #ffffff;
+	border-radius: 5px;
+	border: groove 5px;
+	margin-top: 10px;
+	opacity: 1;
+	position: relative;
+	font-weight: bold;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+}
+
+.operation {
+	background-color: #666699;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	color: #ffffff;
+	border-radius: 5px;
+	border: groove 5px;
+	margin-top: 10px;
+	opacity: 1;
+	position: relative;
+	font-weight: bold;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+}
+
+.other {
+	background-color: #cc0033;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	color: #ffffff;
+	border-radius: 5px;
+	border: groove 5px;
+	margin-top: 10px;
+	opacity: 1;
+	position: relative;
+	font-weight: bold;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#first {
+	margin-top: 10px;
+}
+
+#outermost {
+	border: groove 5px;
+	border-radius: 5px;
+	padding: 15px;
+	width: 253px;
+	background-color: #999999;
+	margin: 30px;
+}
