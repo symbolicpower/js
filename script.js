@@ -67,7 +67,7 @@ $(document).ready(function() {
         $('#display').text(memory);
 	});
 	$('.binary').click(function() {
-		if (!onStatus || $('#display').text().length > 10) {
+		if (!onStatus) {
 			return;
 		}
 		var display = $('#display').text();
@@ -83,7 +83,7 @@ $(document).ready(function() {
         equalsPressed = false;
 	});
 	$('#equals').click(function() {
-		if (!onStatus || $('#display').text().length > 10) {
+		if (!onStatus) {
 			return;
 		}
 		var displayText = $('#display').text();
@@ -96,7 +96,7 @@ $(document).ready(function() {
 		$('#topLine').text('\xa0');
 	});
 	$('#sqrt').click(function() {
-		if (!onStatus || $('#display').text().length > 10) {
+		if (!onStatus) {
 			return;
 		}
 		var display = $('#display').text();
@@ -136,6 +136,9 @@ var parseCalc = function() {
 					result /= parseFloat(computation[i]);
 					break;
 			}
+		}
+		if (result > 99999999999) {
+			result = "OVERFLOW";
 		}
 		return result;
 	}
