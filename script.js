@@ -1,11 +1,11 @@
 var equalsPressed = false;
 var onStatus = true;
 var binaryPressed = false;
-var memory = 'TEST';
+var memory = '';
 
 $(document).ready(function() {
     $('#topLine').text('\xa0');
-	var spaces = Array(26).join("\xa0");
+	var spaces = Array(25).join("\xa0");
     $('#name').text(spaces + 'TI-100');
     $('.button').mouseenter(function() {
         $(this).fadeTo('fast',0.5);
@@ -26,36 +26,41 @@ $(document).ready(function() {
 		$('#display').text(text);
 		binaryPressed = false;
 	});
-	$('#AC').click(function() {
+	$('#ac').click(function() {
 		if (!onStatus) {
 			return;
 		}
 		$('#display').text('0');
 		$('#topLine').text('\xa0');
 	});
-	$('#OFF').click(function() {
+	$('#off').click(function() {
 		onStatus = false;
 		$('#display').text('');
 		$('#topLine').text('\xa0');
 	});
-	$('#ON').click(function() {
+	$('#on').click(function() {
 		onStatus = true;
 		$('#display').text('0');
 		$('#topLine').text('\xa0');
 	});
-    $('#M+').click(function() {
+	$('#del').click(function() {
+		var displayText = $('#display').text();
+		displayText = displayText.substring(0, displayText.length - 1);
+		$('#display').text(displayText);
+	});
+    $('#mplus').click(function() {
 		if (!onStatus) {
 			return;
 		}
         memory = $('#display').text();
 	});
-    $('#M-').click(function() {
+    $('#mminus').click(function() {
         if (!onStatus) {
 			return;
 		}
-        memory = '';
+        memory = '0';
 	});
-    $('#MR').click(function() {
+    $('#mr').click(function() {
         if (!onStatus) {
             return;
 		}
