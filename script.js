@@ -1,9 +1,11 @@
 var equalsPressed = false;
 var onStatus = true;
-var displayLength = 0;
 var binaryPressed = false;
 
 $(document).ready(function() {
+	$('#topLine').text('\xa0');
+	var spaces = Array(26).join("\xa0");
+    $('#name').text(spaces + 'TI-100');
     $('.button').mouseenter(function() {
         $(this).fadeTo('fast',0.5);
     });
@@ -11,19 +13,17 @@ $(document).ready(function() {
         $(this).fadeTo('fast', 1);
     });
 	$('.number').click(function() {
-		if (!onStatus || displayLength > 10) {
+		if (!onStatus || $('#display').text().length > 10) {
 			return;
 		}
-		if ($('#display').text() === '0' || binaryPressed) {
-			var display = '';
-		}
-		else {
-			var display = $('#display').text();
+		var displayText = '';
+		if (!($('#display').text() === '0' || binaryPressed)) {
+			displayText = $('#display').text();
 		}
 		var text = $(this).text();
-		text = display.trim() + text.trim();
+		text = displayText.trim() + text.trim();
 		$('#display').text(text);
-		displayLength++;
+		binaryPressed = false;
 	});
 	$('#AC').click(function() {
 		if (!onStatus) {
@@ -31,22 +31,19 @@ $(document).ready(function() {
 		}
 		$('#display').text('0');
 		$('#topLine').text('\xa0');
-		displayLength = 0;
 	});
 	$('#OFF').click(function() {
 		onStatus = false;
 		$('#display').text('');
 		$('#topLine').text('\xa0');
-		displayLength = 0;
 	});
 	$('#ON').click(function() {
 		onStatus = true;
 		$('#display').text('0');
 		$('#topLine').text('\xa0');
-		displayLength = 0;
 	});
 	$('.binary').click(function() {
-		if (!onStatus || displayLength > 10) {
+		if (!onStatus || $('#display').text().length > 10) {
 			return;
 		}
 		var display = $('#display').text();
@@ -59,19 +56,23 @@ $(document).ready(function() {
 			$('#topLine').append(display);
 		}
 		binaryPressed = true;
+		equalsPressed = false;
 	});
 	$('#equals').click(function() {
-		if (!onStatus) {
+		if (!onStatus || $('#display').text().length > 10) {
 			return;
 		}
-		var display = $('#display').text();
-		$('#topLine').append(display);
+		var displayText = $('#display').text();
+		$('#topLine').append(displayText);
 		var result = parseCalc();
+		result = result.toString().substring(0,10);
 		$('#display').text(result);
 		equalsPressed = true;
+		binaryPressed = false;
+		$('#topLine').text('\xa0');
 	});
 	$('#sqrt').click(function() {
-		if (!onStatus) {
+		if (!onStatus || $('#display').text().length > 10) {
 			return;
 		}
 		var display = $('#display').text();
