@@ -1,9 +1,10 @@
 var equalsPressed = false;
 var onStatus = true;
 var binaryPressed = false;
+var memory = 'TEST';
 
 $(document).ready(function() {
-	$('#topLine').text('\xa0');
+    $('#topLine').text('\xa0');
 	var spaces = Array(26).join("\xa0");
     $('#name').text(spaces + 'TI-100');
     $('.button').mouseenter(function() {
@@ -42,6 +43,24 @@ $(document).ready(function() {
 		$('#display').text('0');
 		$('#topLine').text('\xa0');
 	});
+    $('#M+').click(function() {
+		if (!onStatus) {
+			return;
+		}
+        memory = $('#display').text();
+	});
+    $('#M-').click(function() {
+        if (!onStatus) {
+			return;
+		}
+        memory = '';
+	});
+    $('#MR').click(function() {
+        if (!onStatus) {
+            return;
+		}
+        $('#display').text(memory);
+	});
 	$('.binary').click(function() {
 		if (!onStatus || $('#display').text().length > 10) {
 			return;
@@ -56,7 +75,7 @@ $(document).ready(function() {
 			$('#topLine').append(display);
 		}
 		binaryPressed = true;
-		equalsPressed = false;
+        equalsPressed = false;
 	});
 	$('#equals').click(function() {
 		if (!onStatus || $('#display').text().length > 10) {
@@ -68,7 +87,7 @@ $(document).ready(function() {
 		result = result.toString().substring(0,10);
 		$('#display').text(result);
 		equalsPressed = true;
-		binaryPressed = false;
+        binaryPressed = false;
 		$('#topLine').text('\xa0');
 	});
 	$('#sqrt').click(function() {

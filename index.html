@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
+    <head>
 		<title>First website using HTML, CSS, Javascript, Jquery</title>
 		<link type="text/css" rel="stylesheet" href="stylesheet.css" />
 		<style type="text/css">
 			@font-face {
 				font-family: "digital";
-				src: url(digital.ttf) format("truetype");
+				src: url(https://github.com/symbolicpower/js/blob/master/digital.ttf?raw=true) format("truetype");
 			}
 			}
 		</style>
@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="script.js"> </script>
 	</head>
 	
-	<body>
+    <body>
 		<div id="outermost">
 			<div id="textBox">
 				<p id="topLine"></p>
@@ -24,15 +24,23 @@
 			
 			<div>
 				<div id="solar"> </div>
-				<div id="name"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTI-100</div>
+				<div id="name"></div>
 			</div>
 			
 			<div>
 				<div id="AC" class="other button"><p> AC </p></div>
 				<div id="ON" class="other button"><p> ON </p></div>
 				<div id="OFF" class="other button"><p> OFF </p></div>
+				<div id="back" class="operation button unary"><p> DEL </p></div>
+			</div>
+            
+                		<div>
+				<div id="MR" class="other button memory"><p> MR </p></div>
+				<div id="M+" class="other button memory"><p> M+ </p></div>
+				<div id="M-" class="other button memory"><p> M- </p></div>
 				<div id="sqrt" class="operation button unary"><p> &#8730 </p></div>
 			</div>
+		
 		
 			<div>
 				<div id="7" class="number button"><p> 7 </p></div>
