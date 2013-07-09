@@ -67,6 +67,9 @@ $(document).ready(function() {
 		}
 		else {
 			switch(keyUnicode) {
+				case 110: case 190:
+					numEntry('.');
+					break;
 				case 8:
 					backspace();
 					break;
@@ -80,14 +83,13 @@ $(document).ready(function() {
 					binaryOp('-');
 					break;
 				case 106: case 56: case 88:
-					binaryOp('*');
+					binaryOp('x');
 					break;
 				case 111: case 191:
-					binaryOp('/');
+					binaryOp('\xF7');
 					break;
 			}
 		}
-		binaryPressed = false;
 	});
 });
 
