@@ -1,7 +1,7 @@
 var equalsPressed = false;
 var onStatus = true;
 var binaryPressed = false;
-var memory = '';
+var memory = '0';
 
 $(document).ready(function() {
     $('#topLine').text('\xa0');
@@ -14,6 +14,39 @@ $(document).ready(function() {
         $(this).fadeTo('fast', 1);
     });
 	$('.number').click(function() {
+		numEntry($(this).text());
+	});
+	$('#ac').click(function() {
+		allClear();
+	});
+	$('#off').click(function() {
+		switchOff();
+	});
+	$('#on').click(function() {
+		switchOn();
+	});
+	$('#del').click(function() {
+		backspace();
+	});
+    $('#mplus').click(function() {
+		addToMemory();
+	});
+    $('#mminus').click(function() {
+        removeFromMemory();
+	});
+    $('#mr').click(function() {
+        recallFromMemory();
+	});
+	$('.binary').click(function() {
+		binaryOp($(this).text());
+	});
+	$('#equals').click(function() {
+		equalsOp();
+	});
+	$('#sqrt').click(function(){
+		squareroot();
+	});
+	$(document).keydown(function(key) {
 		if (!onStatus || $('#display').text().length > 10) {
 			return;
 		}
@@ -21,90 +54,40 @@ $(document).ready(function() {
 		if (!($('#display').text() === '0' || binaryPressed)) {
 			displayText = $('#display').text();
 		}
-		var text = $(this).text();
-		text = displayText.trim() + text.trim();
-		$('#display').text(text);
-		binaryPressed = false;
-	});
-	$('#ac').click(function() {
-		if (!onStatus) {
-			return;
+		var text = '';
+		var keyUnicode = key.keyCode? key.keyCode : key.charCode;
+		var digit = 0;
+		if (keyUnicode >= 48 && keyUnicode <= 57) {
+			digit = keyUnicode - 48;
+			numEntry('' + digit);
 		}
-		$('#display').text('0');
-		$('#topLine').text('\xa0');
-	});
-	$('#off').click(function() {
-		onStatus = false;
-		$('#display').text('');
-		$('#topLine').text('\xa0');
-	});
-	$('#on').click(function() {
-		onStatus = true;
-		$('#display').text('0');
-		$('#topLine').text('\xa0');
-	});
-	$('#del').click(function() {
-		var displayText = $('#display').text();
-		displayText = displayText.substring(0, displayText.length - 1);
-		$('#display').text(displayText);
-	});
-    $('#mplus').click(function() {
-		if (!onStatus) {
-			return;
-		}
-        memory = $('#display').text();
-	});
-    $('#mminus').click(function() {
-        if (!onStatus) {
-			return;
-		}
-        memory = '0';
-	});
-    $('#mr').click(function() {
-        if (!onStatus) {
-            return;
-		}
-        $('#display').text(memory);
-	});
-	$('.binary').click(function() {
-		if (!onStatus) {
-			return;
-		}
-		var display = $('#display').text();
-		var op = $(this).text();
-		display = display.trim() + op.trim();
-		if (equalsPressed) {
-			$('#topLine').text(display);
+		else if (keyUnicode >= 96 && keyUnicode <= 105) {
+			digit = keyUnicode - 96;
+			numEntry('' + digit);
 		}
 		else {
-			$('#topLine').append(display);
+			switch(keyUnicode) {
+				case 8:
+					backspace();
+					break;
+				case 13: case 187:
+					equalsOp();
+					break;
+				case 107: case 187:
+					binaryOp('+');
+					break;
+				case 109: case 189:
+					binaryOp('-');
+					break;
+				case 106: case 56: case 88:
+					binaryOp('*');
+					break;
+				case 111: case 191:
+					binaryOp('/');
+					break;
+			}
 		}
-		binaryPressed = true;
-        equalsPressed = false;
-	});
-	$('#equals').click(function() {
-		if (!onStatus) {
-			return;
-		}
-		var displayText = $('#display').text();
-		$('#topLine').append(displayText);
-		var result = parseCalc();
-		result = result.toString().substring(0,10);
-		$('#display').text(result);
-		equalsPressed = true;
-        binaryPressed = false;
-		$('#topLine').text('\xa0');
-	});
-	$('#sqrt').click(function() {
-		if (!onStatus) {
-			return;
-		}
-		var display = $('#display').text();
-		var result = Math.sqrt(display);
-		result = result.toString().substring(0,10);
-		$('#display').text(result);
-		display = '\u221A' + display;
-		$('#topLine').text(display);
+		binaryPressed = false;
 	});
 });
 
@@ -142,4 +125,106 @@ var parseCalc = function() {
 		}
 		return result;
 	}
+};
+
+var numEntry = function(text) {
+		if (!onStatus || $('#display').text().length > 10) {
+			return;
+		}
+		var displayText = '';
+		if (!($('#display').text() === '0' || binaryPressed)) {
+			displayText = $('#display').text();
+		}
+		text = displayText.trim() + text.trim();
+		$('#display').text(text);
+		binaryPressed = false;
+};
+
+var squareroot = function() {
+		if (!onStatus) {
+			return;
+		}
+		var display = $('#display').text();
+		var result = Math.sqrt(display);
+		result = result.toString().substring(0,10);
+		$('#display').text(result);
+		display = '\u221A' + display;
+		$('#topLine').text(display);
+};
+
+var binaryOp = function(op) {
+		if (!onStatus) {
+			return;
+		}
+		var display = $('#display').text();
+		display = display.trim() + op.trim();
+		if (equalsPressed) {
+			$('#topLine').text(display);
+		}
+		else {
+			$('#topLine').append(display);
+		}
+		binaryPressed = true;
+        equalsPressed = false;
+};
+
+var equalsOp = function() {
+		if (!onStatus) {
+			return;
+		}
+		var displayText = $('#display').text();
+		$('#topLine').append(displayText);
+		var result = parseCalc();
+		result = result.toString().substring(0,10);
+		$('#display').text(result);
+		equalsPressed = true;
+        binaryPressed = false;
+		$('#topLine').text('\xa0');
+};
+
+var backspace = function() {
+		var displayText = $('#display').text();
+		displayText = displayText.substring(0, displayText.length - 1);
+		$('#display').text(displayText);
+};
+
+var allClear = function() {
+		if (!onStatus) {
+			return;
+		}
+		$('#display').text('0');
+		$('#topLine').text('\xa0');
+};
+
+var switchOff = function() {
+		onStatus = false;
+		$('#display').text('');
+		$('#topLine').text('\xa0');
+};
+
+var switchOn = function() {
+		onStatus = true;
+		$('#display').text('0');
+		$('#topLine').text('\xa0');
+};
+
+var addToMemory = function() {
+		if (!onStatus) {
+			return;
+		}
+        memory = $('#display').text();
+};
+
+var removeFromMemory = function() {
+        if (!onStatus) {
+			return;
+		}
+        memory = '0';
+};
+
+var recallFromMemory = function() {
+        if (!onStatus) {
+            return;
+		}
+        $('#display').text(memory);
 };
